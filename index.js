@@ -57,9 +57,9 @@ const init = () => {
     puaY += transformY;
 
     // X axis: body sit next to the mouse
-    const diffX = mouseX - puaX - 20;
+    const diffX = mouseX > puaX ? mouseX - puaX - 40 : mouseX - puaX;
     const transformX = diffX * SPEED;
-    puaX = Math.abs(diffX) > 20 ? puaX + transformX : puaX;
+    puaX += transformX;
 
     pua.style.left = `${puaX}px`;
     pua.style.top = `${puaY}px`;
