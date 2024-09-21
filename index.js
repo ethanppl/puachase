@@ -19,26 +19,28 @@ const getPua = ({puaX, puaY, puaFile}) => {
 const init = () => {
   // Global variables to keep track of
   let mouseX = 20;
-  let mouseY = 20;
+  let mouseY = 60;
   let puaX = 20;
   let puaY = 20;
 
   // Params
-  const SPEED = 0.1;
+  const SPEED = 0.05;
   const puaFile = "./pua-sitting.png";
 
   // Assets
   const pua = getPua({puaX, puaY, puaFile});
 
   const animate = () => {
-    const diffX = mouseX - puaX - 20;
-    const diffY = mouseY - puaY - 20;
-
-    const transformX = diffX * SPEED;
+    // Y axis: feet stick to the mouse
+    const diffY = mouseY - puaY - 40;
     const transformY = diffY * SPEED;
-
-    puaX += transformX;
     puaY += transformY;
+
+    // X axis: body sit next to the mouse
+    const diffX = mouseX - puaX - 20;
+    const transformX = diffX * SPEED;
+    puaX = Math.abs(diffX) > 20 ? puaX + transformX : puaX;
+
     pua.style.left = `${puaX}px`;
     pua.style.top = `${puaY}px`;
 
