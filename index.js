@@ -87,6 +87,9 @@ const init = () => {
 
   // Mobile: drag and drop
   ball.ontouchmove = (event) => {
+    // Smoother dragging on mobile
+    event.preventDefault();
+
     mouseX = event.touches[0].clientX;
     mouseY = event.touches[0].clientY;
 
